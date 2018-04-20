@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>登录</title>
+    <script src="{{url_for('static',filename = 'js/login.js')}}"></script>
+{% endblock %}
+
+{% block main %}
+<div style="padding: 20px 30%">
+    <div class="form-group">
+        <h1>登录</h1>
+        <form method="post" action="/login" onsubmit="return validate_form(this)">
+            <label>账号</label><input class="form-control" type="text" id="txt_username" name="useraccount"><br>
+            <label>密码</label><input class="form-control" type="password" id="txt_userpwd" name="userpwd"><br>
+
+            <input type="checkbox" id="ck_rmbUser" name="isRmbUser">一个月内自动登录<br>
+            <input class="btn btn-default" type="submit" id="sub" value="登录">
+        </form>
+    </div>
+</div>
+{% endblock %}

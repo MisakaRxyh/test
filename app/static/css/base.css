@@ -1,0 +1,16 @@
+.logo {
+    height: 25.86px;
+}
+.main {
+    background: #FFFFFF;
+    width: 90%;
+    height: 870px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px 80px;
+}
+body {
+    padding-top: 60px;
+    background-color: #F3F3F3;
+    font-size: 15px;
+}

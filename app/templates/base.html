@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--
+    <link rel="stylesheet" href="../static/css/header.css" type="text/css">
+    -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 jquery 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <!-- 最新的 font-awesome 核心 css 文件 -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/base.css')}}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="{{url_for('static',filename = 'images/aline.jpg')}}">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index">首页<span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">查询 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="simple">简单查询</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="count">统计查询</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">更多</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user %}
+                <li><a href="#">{{user.userName}}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">功能 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="home">我的收藏</a></li>
+                        <li role="separator" class="divider"></li>
+                        {% if user.Admin == 1 %}
+                        <li><a href="admin">后台管理</a></li>
+                        <li role="separator" class="divider"></li>
+                        {% endif %}
+                        <li><a href="logout">退出</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li><a href="login">登录</a></li>
+                <li><a href="register">注册</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    {% block main %}{% endblock %}
+</div>
+
+</body>
+</html>

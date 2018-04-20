@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>注册</title>
+    <script src="{{url_for('static',filename = 'js/register.js')}}"></script>
+{% endblock %}
+{% block main %}
+<div style="padding: 20px 30%">
+    <div class="form-group">
+        <h1>注册</h1>
+        <form method="post" action="/register" onsubmit="return validate_form(this)">
+            <label>账号</label><br><input class="form-control" type="text" name="useraccount"><br>
+            <laber>用户名</laber><br><input class="form-control" type="text" name="username"><br>
+            <label>密码</label><br><input class="form-control" type="password" name="userpwd"><br>
+            <label>确认密码</label><br><input class="form-control" type="password" name="againpwd"><br>
+            <input class="btn btn-default" type="submit" value="注册">
+        </form>
+    </div>
+</div>
+{% endblock %}

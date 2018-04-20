@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>统计查询</title>
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/count.css')}}">
+<script src="{{url_for('static',filename = 'js/count.js')}}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="form-group">
+    <form method="get" action='/count_query' onsubmit="return validate_form(this)">
+        <label><input class="form-control" type="text" name="search" placeholder=""></label>
+        <input class="btn btn-default" type="submit" value="查询">
+    </form>
+</div>
+<div class="count">
+    <h1>结果</h1>
+    {% if result %}
+    <p>与 {{ result['skillName'] }} 相关的岗位共有 {{ result['positionCount'] }} 个， 主要分布在 {{ result['mainCity']['firstCity']
+        }},{{ result['mainCity']['secondCity'] }},{{ result['mainCity']['thirdCity'] }} 等城市， 平均工资为 {{
+        result['mainSalary'] }}， 大部分需要 {{ result['mainEducation'] }} 学历</p>
+    <br>
+    {% if user %}
+    <a href="collect?statisticsID={{statisticsID}}">收藏此页</a>
+    {% endif %}
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>城市分布图</h3>
+        <img class="pieimg" src={{ result['path']['cpath'] }}>
+    </div>
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>薪资分布图</h3>
+        <img class="pieimg" src={{ result['path']['spath'] }}>
+    </div>
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>学历分布图</h3>
+        <img class="pieimg" src={{ result['path']['epath'] }}>
+    </div>
+    {% else %}
+    <p>没有查询到{{ name }}相关数据</p>
+    {% endif %}
+</div>
+{% endblock %}

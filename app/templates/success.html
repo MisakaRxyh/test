@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>注册成功</title>
+    <script src="{{url_for('static',filename = 'js/register.js')}}"></script>
+{% endblock %}
+
+{% block main %}
+    <body onload="Load('index')">
+        亲爱的{{user.userName}}，恭喜您注册成功！
+        <div id="ShowDiv"></div>
+    </body>
+{% endblock %}

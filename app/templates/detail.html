@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>详情</title>
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/detail.css')}}">
+{% endblock %}
+
+{% block main %}
+<div class="detail">
+<h1>收藏详情</h1>
+{% if stat %}
+    <p>与 {{ stat['skillName'] }} 相关的岗位共有 {{ stat['positionCount'] }} 个， 主要分布在 {{ stat['firstCity'] }},
+        {{ stat['secondCity'] }},{{ stat['thirdCity'] }} 等城市， 平均工资为 {{ stat['mainSalary'] }}， 大部分需要 {{ stat['mainEducation'] }} 学历</p>
+    <br>
+    {% if user %}
+    <a href="delete?statisticsID={{stat.statisticsID}}">删除收藏</a>
+    {% endif %}
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>城市分布图</h3>
+        <img class="pieimg" src={{ stat['cityImgUrl'] }}>
+    </div>
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>薪资分布图</h3>
+        <img class="pieimg" src={{ stat['salaryImgUrl'] }}>
+    </div>
+    <div>
+        <h3><i class="fa fa-pie-chart"></i>学历分布图</h3>
+        <img class="pieimg" src={{ stat['educationImgUrl'] }}>
+    </div>
+{% endif %}
+</div>
+{% endblock %}

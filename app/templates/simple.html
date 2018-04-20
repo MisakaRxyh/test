@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>简单查询</title>
+<script src="{{url_for('static',filename = 'js/simple.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/simple.css')}}">
+{% endblock %}
+
+{% block main %}
+<div class="form-group">
+    <form method="get" action='/simple_query' onsubmit="return validate_form(this)">
+        <label><input class="form-control" type="text" name="search" value=""></label>
+        <input class="btn btn-default" type="submit" value="查询">
+    </form>
+</div>
+{% if result %}
+<div class="simple">
+    <table class="table">
+        <tr>
+            <th>职位编号</th>
+            <th width="180px">职位名称</th>
+            <th width="180px">公司简称</th>
+            <th>所在城市</th>
+            <th>基本薪资</th>
+            <th>学历要求</th>
+            <th>工作经验</th>
+            <th>发布时间</th>
+        </tr>
+        {% for r in result %}
+        <tr>
+            <td height="57px">{{ r.positionId }}</td>
+            <td height="57px">{{ r.positionName }}</td>
+            <td height="57px">{{ r.companyShortName }}</td>
+            <td height="57px">{{ r.city }}</td>
+            <td height="57px">{{ r.salary }}</td>
+            <td height="57px">{{ r.education }}</td>
+            <td height="57px">{{ r.workYear }}</td>
+            <td height="57px">{{ r.createTime }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <nav aria-label="Page navigation" style="text-align: center">
+        <ul class="pagination">
+            <li>
+                <a href="{% if pagination.has_prev %}{{url_for('main.simple_query',page=pagination.page-1,search=search)}}{% else %}#{% endif %}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for p in pagination.iter_pages() %}
+            <li class="{% if pagination.page == p %}active{% endif %}">
+                {% if p == None %}
+                <a class="disabled" href="#">...</a>
+                {% else %}
+                <a href="{{url_for('main.simple_query',page=p,search=search)}}">{{p}}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li>
+                <a href="{%if pagination.has_next %}{{url_for('main.simple_query',page=pagination.page+1,search=search)}}{% else %}#{% endif %}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% else %}
+<div>
+    <p>没有查询到结果</p>
+</div>
+{% endif %}
+{% endblock %}

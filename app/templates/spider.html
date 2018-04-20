@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>500</title>
+{% endblock %}
+
+{% block main %}
+<form method="post" action="/spider" >
+    爬起范围：<input type="text" name="begin"> - <input type="text" name="end">
+<button type="submit" class="btn btn-primary">爬取数据</button><br>
+<textarea>
+
+</textarea>
+
+</form>
+
+{% endblock %}

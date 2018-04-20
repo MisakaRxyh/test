@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>{{user.userName}}的空间</title>
+{% endblock %}
+
+{% block main %}
+<h1>我的收藏</h1>
+{% if collections %}
+    <div>
+        <table class="table">
+            <tr>
+                <th>collectID</th>
+                <th>userID</th>
+                <th>statisticsID</th>
+                <th>collectDate</th>
+                <th>queryName</th>
+                <th></th>
+            </tr>
+            {% for collection in collections %}
+                <tr>
+                    <td>{{ collection.collectID }}</td>
+                    <td>{{ collection.userID }}</td>
+                    <td>{{ collection.statisticsID }}</td>
+                    <td>{{ collection.collectDate }}</td>
+                    <td>{{ collection.queryName }}</td>
+                    <td><a href="{{url_for('main.detail',statisticsID=collection.statisticsID)}}">详情</a></td>
+                    <!--<td><a href="detail?statisticsID={{collection.statisticsID}}">详情</a></td>-->
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+        <div>
+            <p>还没有收藏</p>
+        </div>
+    {% endif %}
+{% endblock %}

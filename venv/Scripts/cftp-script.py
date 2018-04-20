@@ -1,0 +1,10 @@
+#!G:\bishe\venv\Scripts\python.exe
+# EASY-INSTALL-ENTRY-SCRIPT: 'Twisted==17.9.0','console_scripts','cftp'
+__requires__ = 'Twisted==17.9.0'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('Twisted==17.9.0', 'console_scripts', 'cftp')()
+    )

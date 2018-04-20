@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery Ajax Test</title>
+    <script src="static/jquery.min.js">
+    </script>
+<script>
+$(document).ready(function(){
+    $(".btn12").click(function(){
+
+        $.getJSON("/mytable",function(data){
+            if(data.length > 0)
+            {
+                $("#createtable").empty();
+                var table=$("<table border='1' cellspacing='0'> </table>");
+                table.appendTo($("#createtable"));
+
+                var trh=$("<tr></tr>");
+                trh.appendTo(table);
+
+                for(var h=0; h<data[0].length; h++)
+                {
+                    var th = $("<th>" +data[0][h]+"</th>");
+                    th.appendTo(trh);
+                }
+
+                for(var r=1; r<data.length; r++)
+                {
+                    var tr=$("<tr></tr>");
+                    tr.appendTo(table);
+
+                    for(var j=0;j<data[r].length;j++)
+                    {
+                        var td=$("<td>"+data[r][j]+"</td>");
+                        td.appendTo(tr);
+                    }
+                }
+            }
+
+        });
+
+    });
+
+});
+
+
+</script>
+
+</head>
+<body>
+    <h1>Ajax Test</h1>
+<button class="btn12">从后端获取数据动态生成表格</button>
+<div id="createtable"></div>
+</body>
+</html>

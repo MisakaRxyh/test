@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>用户列表</title>
+<link rel="stylesheet" href="{{url_for('static',filename = '')}}">
+<script src="{{url_for('static',filename = '')}}"></script>
+{% endblock %}
+
+{% block main %}
+<body>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+...more buttons...
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name" class="control-label">昵称</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+          <div class="form-group">
+            <label for="account" class="control-label">账号</label>
+            <input type="text" class="form-control" id="account">
+          </div>
+            <div class="form-group">
+            <label for="password" class="control-label">密码</label>
+            <input type="text" class="form-control" id="password">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('更新' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+</script>
+
+
+<h1>用户列表</h1>
+{% if user_list %}
+    <div>
+        <table class="table">
+            <tr>
+                <th>编号</th>
+                <th>昵称</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>权限</th>
+                <th>操作</th>
+            </tr>
+            {% for u in user_list %}
+                <tr>
+                    <td>{{ u.userID }}</td>
+                    <td>{{ u.userName }}</td>
+                    <td>{{ u.userAccount }}</td>
+                    <td>{{ u.userPwd }}</td>
+                    <td>{% if u.Admin == 1 %}
+                        是
+                        {% else %}
+                        否
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="{{u.userName}}">更新</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">删除</button>
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+        <div>
+            <p>还没有收藏</p>
+        </div>
+    {% endif %}
+</body>
+{% endblock %}

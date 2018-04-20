@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>主页</title>
+{% endblock %}
+
+{% block main %}
+<div class="jumbotron">
+  <h1>近期招聘信息展示网站</h1>
+  <p>xxxxxxxxxxxxxxxxxx</p>
+    <i class="fa fa-camera-retro fa-lg"></i> fa-lg
+</div>
+{% if skill %}
+<div>
+    <ul class="nav nav-pills" role="tablist">
+        {% for s in skill %}
+        <li role="presentation">
+            <a href="{{url_for('main.simple_query',search=s.skillName)}}">{{ s.skillName }}
+                {% if s.skillNum != 0 %}
+                <span class="badge">{{ s.skillNum }}</span>
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}
