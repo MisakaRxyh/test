@@ -51,7 +51,7 @@ simplejson==3.13.2
 six==1.11.0
 SQLAlchemy==1.2.6
 style==1.1.0
-Twisted==17.9.0
+Twisted==22.2.0
 update==0.0.1
 urllib3==1.22
 virtualenv==15.1.0
