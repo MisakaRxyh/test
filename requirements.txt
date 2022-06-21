@@ -28,7 +28,7 @@ lxml==4.1.1
 Mako==1.0.7
 MarkupSafe==1.0
 matplotlib==2.2.0
-numpy==1.14.1
+numpy==1.22.0
 package-name==0.1
 parsel==1.4.0
 pyasn1==0.4.2
